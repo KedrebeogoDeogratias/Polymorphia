@@ -1,9 +1,11 @@
 package com.polymorphia.www;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Inventaire {
+public class Inventaire implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int coins;
     private List<Arme> armes;
     private List<Armure> armures;

@@ -1,6 +1,7 @@
 package com.polymorphia.www;
 
 public class Materia extends Objet {
+    private static final long serialVersionUID = 1L;
     private int bonus;
 
     public Materia(String nom, int prix, int bonus) {

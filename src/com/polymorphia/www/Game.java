@@ -78,6 +78,12 @@ public class Game {
                 case 7:
                     joueur.getInventaire().afficher();
                     break;
+                case 8:
+                    sauvegarderPartie();
+                    break;
+                case 9:
+                    chargerPartie();
+                    break;
                 case 0:
                     jouer = false;
                     System.out.println("\nMerci d'avoir joué à Polymorphia !");
@@ -110,6 +116,8 @@ public class Game {
         System.out.println("  5. Utiliser une Potion");
         System.out.println("  6. Voir les statistiques");
         System.out.println("  7. Voir l'inventaire");
+        System.out.println("  8. Sauvegarder la partie");
+        System.out.println("  9. Charger une partie");
         System.out.println("  0. Quitter le jeu");
         System.out.println("═══════════════════════════════════════════");
         System.out.print("Votre choix : ");
@@ -255,6 +263,33 @@ public class Game {
             case 2:
                 joueur.equiperArmure(scanner);
                 break;
+        }
+    }
+
+    private void sauvegarderPartie() {
+        System.out.println("\n💾 SAUVEGARDE DE LA PARTIE");
+        Sauvegarde.sauvegarder(joueur);
+    }
+
+    private void chargerPartie() {
+        System.out.println("\n📂 CHARGEMENT D'UNE PARTIE");
+        if (!Sauvegarde.sauvegardeExiste()) {
+            System.out.println("❌ Aucune sauvegarde trouvée !");
+            return;
+        }
+        System.out.println("⚠️  Attention : Charger une partie remplacera votre progression actuelle !");
+        System.out.println("Voulez-vous continuer ? (1 = Oui, 0 = Non)");
+        System.out.print("Votre choix : ");
+        int confirmation = lireChoix();
+        if (confirmation == 1) {
+            Joueur joueurCharge = Sauvegarde.charger();
+            if (joueurCharge != null) {
+                this.joueur = joueurCharge;
+                System.out.println("📊 Statistiques du personnage chargé :");
+                joueur.afficherStatuts();
+            }
+        } else {
+            System.out.println("Chargement annulé.");
         }
     }
 

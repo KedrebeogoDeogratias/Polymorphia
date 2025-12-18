@@ -1,9 +1,11 @@
 package com.polymorphia.www;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-public class Joueur {
+public class Joueur implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String nom;
     private int vie;
     private int vieMax;
