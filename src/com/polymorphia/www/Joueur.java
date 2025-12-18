@@ -194,4 +194,7 @@ public class Joueur implements Serializable {
     public int getAttaque() { return attaque; }
     public int getCompetence() { return competence; }
     public Inventaire getInventaire() { return inventaire; }
+    public int getBonusMateria() { return bonusMateria; }
+    public Arme getArmeEquipee() { return armeEquipee; }
+    public Armure getArmureEquipee() { return armureEquipee; }
 }

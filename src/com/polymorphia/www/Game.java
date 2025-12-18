@@ -1,5 +1,7 @@
 package com.polymorphia.www;
 
+import com.polymorphia.www.multijoueur.GameMultijoueur;
+import com.polymorphia.www.multijoueur.ServeurMultijoueur;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -84,6 +86,12 @@ public class Game {
                 case 9:
                     chargerPartie();
                     break;
+                case 10:
+                    lancerModeMultijoueur();
+                    break;
+                case 11:
+                    lancerServeur();
+                    break;
                 case 0:
                     jouer = false;
                     System.out.println("\nMerci d'avoir joué à Polymorphia !");
@@ -118,6 +126,8 @@ public class Game {
         System.out.println("  7. Voir l'inventaire");
         System.out.println("  8. Sauvegarder la partie");
         System.out.println("  9. Charger une partie");
+        System.out.println(" 10. Mode Multijoueur");
+        System.out.println(" 11. Lancer un serveur");
         System.out.println("  0. Quitter le jeu");
         System.out.println("═══════════════════════════════════════════");
         System.out.print("Votre choix : ");
@@ -291,6 +301,27 @@ public class Game {
         } else {
             System.out.println("Chargement annulé.");
         }
+    }
+
+    private void lancerModeMultijoueur() {
+        System.out.println("\n🌐 MODE MULTIJOUEUR");
+        GameMultijoueur gameMulti = new GameMultijoueur(joueur, scanner);
+        gameMulti.demarrer();
+    }
+
+    private void lancerServeur() {
+        System.out.println("\n🖥️  LANCER UN SERVEUR");
+        System.out.print("Port du serveur (défaut: 8888) : ");
+        scanner.nextLine(); // Vider le buffer
+        String portStr = scanner.nextLine().trim();
+        int port = portStr.isEmpty() ? 8888 : Integer.parseInt(portStr);
+        
+        ServeurMultijoueur serveur = new ServeurMultijoueur(port);
+        serveur.demarrer();
+        
+        System.out.println("\n⚠️  Le serveur tourne en arrière-plan.");
+        System.out.println("   D'autres joueurs peuvent maintenant se connecter !");
+        System.out.println("   Vous pouvez continuer à jouer en solo ou rejoindre votre propre serveur.");
     }
 
     public static void main(String[] args) {
