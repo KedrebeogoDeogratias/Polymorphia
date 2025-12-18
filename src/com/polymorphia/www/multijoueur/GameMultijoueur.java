@@ -25,6 +25,11 @@ public class GameMultijoueur {
         System.out.println("║        MODE MULTIJOUEUR                   ║");
         System.out.println("╚═══════════════════════════════════════════╝");
         
+        // Vider le buffer du scanner
+        if (scanner.hasNextLine()) {
+            scanner.nextLine();
+        }
+        
         System.out.print("Adresse du serveur (défaut: localhost) : ");
         String hote = scanner.nextLine().trim();
         if (hote.isEmpty()) {
@@ -271,7 +276,9 @@ public class GameMultijoueur {
     
     private int lireChoix() {
         try {
-            return scanner.nextInt();
+            int choix = scanner.nextInt();
+            scanner.nextLine(); // Vider le buffer après nextInt()
+            return choix;
         } catch (Exception e) {
             scanner.nextLine();
             return -1;
